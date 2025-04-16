@@ -7,9 +7,9 @@ pthread_mutex_t log_mutex;
 
 void *counting_thread(void *arg) {
     int thread_id = (int)(long)arg;
-    FILE *log_file = fopen("log.txt", "a");
+    FILE *log_file = fopen("mutex_log.txt", "a");
     if (log_file == NULL) {
-        perror("fopen (log.txt)");
+        perror("fopen (mutex_log.txt)");
         exit(1);
     }
 

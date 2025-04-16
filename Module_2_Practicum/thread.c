@@ -46,9 +46,9 @@ void *even_thread(void *arg) {
 void run_threads_and_log() {
     pthread_t threads[3];
     void *thread_results[3];
-    FILE *log_file = fopen("log.txt", "a");
-    if (log_file == NULL) {
-        perror("fopen (log.txt)");
+    FILE *threads_log = fopen("threads_log.txt", "a");
+    if (threads_log == NULL) {
+        perror("fopen (threads_log.txt)");
         exit(1);
     }
 
@@ -73,7 +73,7 @@ void run_threads_and_log() {
             exit(1);
         }
     }
-     // Determine the order and write to log.txt
+     // Determine the order and write to threads_log.txt
     int order[3] = {0};
     for (int i = 0; i < 3; i++) {
         if ((long)thread_results[i] == 1) {
@@ -86,11 +86,11 @@ void run_threads_and_log() {
     }
     for(int i=0; i<3; i++){
         if(order[i] == 1){
-             fprintf(log_file, "1.  Thread %d\n", i+1);
+             fprintf(threads_log, "1.  Thread %d\n", i+1);
              break;
         }
     }
-    fclose(log_file);
+    fclose(threads_log);
 }
 
 int main() {
